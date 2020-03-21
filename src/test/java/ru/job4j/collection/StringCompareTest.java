@@ -96,5 +96,4 @@ public class StringCompareTest {
         );
         assertThat(rst, is(0));
     }
-
 }
