@@ -68,7 +68,7 @@ public class StringCompareTest {
     }
 
     @Test
-    public void whenIndexTwoLessThanResultShouldBeNegative () {
+    public void whenIndexThreeLessThanResultShouldBeNegative () {
         StringCompare compare = new StringCompare();
         int rst = compare.compare(
                 "Vetrov",
