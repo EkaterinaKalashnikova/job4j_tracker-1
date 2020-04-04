@@ -7,7 +7,7 @@ package com;
  * @version
  */
 public class Account {
-   private double values; // отмечаем подя private, делаем обьект неизиеняемым
+   private double values; // отмечаем поля private, делаем обьект неизменяемым
    private String reqs;
 
     public Account(double values, String requisites) {
