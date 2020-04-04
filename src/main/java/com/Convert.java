@@ -12,7 +12,10 @@ public class Convert {
     public Convert(){
     }
 
-    //Converts array to list
+    /**Converts array to list
+     * @param  array
+     * @return list
+     */
     List<Integer> makeList(int[][] array) {
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < array.length; i++) {
@@ -23,7 +26,12 @@ public class Convert {
     }
 
 
-    //Converts list to array
+    /**Converts list to array
+     *
+     * @param list
+     * @param rws
+     * @return array
+     */
     public int[][] makeArray(List<Integer> list, int rws) {
         Iterator<Integer> iterator = list.iterator();
         int cls = list.size() / rws + (list.size() % rws == 0 ? 0 : 1);
