@@ -8,12 +8,26 @@ import java.util.Map;
 public class BankService {
     private Map<User, List<Account>> users = new HashMap<>();
 
+    /** Method of adding a bank client to the system
+     * default: an empty list of bank accounts at the beginning
+     *
+     * @param user - a bank client
+     */
     public void addUser(User user) {
-
+        if (this.users.putIfAbsent(user, new ArrayList <>())!= null) {
+        }
     }
 
+    /** Method of adding to a new account of a bank client
+     *
+     * @param passport - passport
+     * @param account - bank account
+     */
     public void addAccount(String passport, Account account) {
-
+        List <Account> accounts = this.users.get(findByPassport(passport));
+        if (accounts.indexOf(account) != -1) {
+        }
+        accounts.add(account);
     }
 
     public User findByPassport(String passport) {

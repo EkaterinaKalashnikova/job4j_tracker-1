@@ -27,14 +27,17 @@ public class Bank {
         this.treemap.get(user).add(account);
     }
 
-    public Account getActualAccount(User user, Account account) {
-        // делаем метод public место private
+    public Account getActualAccount(User user, Account account) { // делаем метод public вместо private
         ArrayList<Account> list = this.treemap.get(user);
+            if (list.indexOf(account) != -1) {
+        }
         return list.get(list.indexOf(account));
     }
 
     public void deleteAccount(User user, Account account) {
-        this.treemap.get(user).remove(account);
+          if (treemap.get(user) != null) {
+              this.treemap.get(user).remove(account);
+          }
     }
 
     public List<Account> getAccounts(User user) {
