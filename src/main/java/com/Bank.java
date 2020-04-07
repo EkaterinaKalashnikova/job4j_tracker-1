@@ -29,7 +29,9 @@ public class Bank {
 
     public Account getActualAccount(User user, Account account) { // делаем метод public вместо private
         ArrayList<Account> list = this.treemap.get(user);
-            if (list.indexOf(account) != -1) {
+        int index = list.indexOf(account);
+            if (index != -1) {
+                account = list.get(index);
         }
         return list.get(list.indexOf(account));
     }

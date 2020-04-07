@@ -1,9 +1,6 @@
 package ru.jobj4.bank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BankService {
     private Map<User, List<Account>> users = new HashMap<>();
@@ -30,18 +27,61 @@ public class BankService {
         accounts.add(account);
     }
 
-    public User findByPassport(String passport) {
-        return null;
+    /** Method search for a bank client by passport number
+     *
+     * @param passport - passport
+     * @return user.getPassport()
+     */
+    public User findByPassport( String passport) {
+        HashMap<String, User> map = new HashMap();
+        Set <String> collection = map.keySet();
+        User user = new User(); //
+        for(String key : collection) {
+            User users = map.get(key);
+            if (key != null) {
+                if (user.equals(users)) { //
+                    return key;
+                }
+            }
+        }
+        return user;
     }
 
+    /** Method search account requisite
+     *
+     * @param passport
+     * @param requisite
+     * @return
+     */
     public Account findByRequisite(String passport, String requisite) {
-
-        return null;
+      List<Account> accounts = findByPassport(passport);
+      int index = accounts.indexOf(new Account(requisite, 0));
+      if (index < 0) {
+      }
+      return accounts.get(index);
     }
 
+    /** Method transfers from one account to another
+     *
+     * @param srcPassport
+     * @param srcRequisite
+     * @param destPassport
+     * @param dеstRequisite
+     * @param amount
+     * @return rsl
+     */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String dеstRequisite, double amount) {
-        boolean rsl=false;
+        boolean rsl = false;
+        Account src = findByRequisite(srcPassport, srcRequisite);
+        Account dest = findByRequisite(destPassport, dеstRequisite);
+         if (src != null && dest != null) {
+             if (amount > 0 && src.getBalance() != 0 && src.getBalance() > amount) {
+                src.setBalance(amount);
+                dest.setBalance(amount);
+                rsl = true;
+             }
+         }
         return rsl;
     }
 
