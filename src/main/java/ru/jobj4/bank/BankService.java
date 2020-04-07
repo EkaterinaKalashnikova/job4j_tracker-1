@@ -77,10 +77,10 @@ public class BankService {
         Account src = findByRequisite(srcPassport, srcRequisite); //определяем счет снятия
         Account dest = findByRequisite(destPassport, dеstRequisite); //определяем счет зачисления
         if (src != null && dest !=  null){ //проверяем что существуют счета
-            if ( src.getBalance() != 0 && src.getBalance() > amount){ //присутствие нужной суммы
+            if (src.getBalance() != 0 && src.getBalance() > amount) { //присутствие нужной суммы
                 src.setBalance(src.getBalance()-amount); //снимаем
                 dest.setBalance(src.getBalance()+amount); //зачисляем
-                rsl=true;
+                rsl = true;
             }
         }
         return rsl;
