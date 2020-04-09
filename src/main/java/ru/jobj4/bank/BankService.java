@@ -22,10 +22,9 @@ public class BankService {
     public void addAccount(String passport, Account account) {
         List<Account> accounts = users.get(findByPassport(passport)); //находим клиента по паспорту
         int index = accounts.indexOf(account);
-        if (index != -1) { //проверяем есть ли данный счет у клиента
-            account = accounts.get(index);
+        if (index == -1) { //есть ли счета у клиента нет
+            accounts.add(account); //добавляем
         }
-        accounts.add(account); // добавляем
     }
 
     /** Method search for a bank client by passport number
@@ -34,15 +33,9 @@ public class BankService {
      * @return user
      */
     public User findByPassport(String passport) {
-       HashMap<String, User> map = new HashMap(); //создание обьекта
-       Set<String> set = map.keySet(); // возвращает набор, который содержит ключ
-        User user = new User(); //хотим найти клиента
-        for (String key : set) {
-            User users = map.get(key);
-            if (key != null) {
-                if (users.equals(user)) { //нашли наше значение и возвращаем  ключ
-                    return findByPassport(key);
-                }
+        User user = new User(); //создаем обьект
+        for(User key : users.keySet()) { //проверяем всех клиентов по ключу
+            if (key != null && user.equals(users)) {
             }
         }
         return user;
@@ -57,9 +50,10 @@ public class BankService {
     public Account findByRequisite(String passport, String requisite) {
       List<Account> accounts = users.get(findByPassport(passport)); //находим пользователя
       int index = accounts.indexOf(new Account(requisite, 0)); //список счетов по нему
-      if (index < 0) {
+      if (index == -1) { //есть ли счета у клиента нет
+          accounts.add(new Account(requisite, 0));
       }
-      return accounts.get(index); //получаем нужный
+      return accounts.get(index);
     }
 
     /** Method transfers from one account to another
@@ -71,17 +65,17 @@ public class BankService {
      * @param amount - amount of money transferred
      * @return rsl
      */
-    public boolean transferMoney(String srcPassport, String srcRequisite,
-                                 String destPassport, String dеstRequisite, double amount) {
+    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport,
+                                 String dеstRequisite, double amount) {
         boolean rsl = false;
         Account src = findByRequisite(srcPassport, srcRequisite); //определяем счет снятия
         Account dest = findByRequisite(destPassport, dеstRequisite); //определяем счет зачисления
-        if (src != null && dest !=  null){ //проверяем что существуют счета
-            if (src.getBalance() != 0 && src.getBalance() > amount) { //присутствие нужной суммы
-                src.setBalance(src.getBalance()-amount); //снимаем
-                dest.setBalance(src.getBalance()+amount); //зачисляем
-                rsl = true;
-            }
+         if (src != null && dest !=  null) { //проверяем что существуют счета
+               if (src.getBalance() != 0 && src.getBalance() > amount) { //присутствие нужной суммы
+                     src.setBalance(src.getBalance() - amount); //снимаем
+                     dest.setBalance(src.getBalance() + amount); //зачисляем
+                     rsl = true;
+                 }
         }
         return rsl;
     }
