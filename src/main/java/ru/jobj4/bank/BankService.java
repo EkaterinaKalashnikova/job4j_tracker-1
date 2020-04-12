@@ -19,12 +19,15 @@ public class BankService {
      * @param passport - passport a bank client
      * @param account - bank account
      */
+
     public void addAccount(String passport, Account account) {
-        List<Account> accounts = users.get(findByPassport(passport)); //находим клиента по паспорту
-        int index = accounts.indexOf(account);
-        if (index == -1) { //есть ли счета у клиента нет
-            accounts.add(account); //добавляем
-        }
+       // this.users.get(passport).add(account);
+        List<Account> accounts = this.users.get(findByPassport(passport));
+        //users.get(findByPassport(passport)); //находим клиента по паспорту
+         int index = accounts.indexOf(account);
+         if (index == -1) { //есть ли счета у клиента нет
+             accounts.add(account); //добавляем
+         }
     }
 
     /** Method search for a bank client by passport number
@@ -35,7 +38,7 @@ public class BankService {
     public User findByPassport(String passport) {
         User user = new User(); //создаем обьект
         for(User key : users.keySet()) { //проверяем всех клиентов по ключу
-            if (key != null && user.equals(users)) {
+           if (user.getPassport().compareTo(passport) == 0) { //
             }
         }
         return user;
@@ -45,15 +48,16 @@ public class BankService {
      *
      * @param passport - passport a bank client
      * @param requisite - requisite a bank client
-     * @return
+     * @return received list of accounts by index
      */
     public Account findByRequisite(String passport, String requisite) {
-      List<Account> accounts = users.get(findByPassport(passport)); //находим пользователя
-      int index = accounts.indexOf(new Account(requisite, 0)); //список счетов по нему
-      if (index == -1) { //есть ли счета у клиента нет
-          accounts.add(new Account(requisite, 0));
-      }
-      return accounts.get(index);
+      List<Account> accounts = this.users.get(findByPassport(passport)); //находим пользователя
+        int index = accounts.indexOf(new Account(requisite, 0)); //список счетов по нему
+        if (index == -1) { //есть ли счета у клиента нет
+            accounts.add(new Account(requisite, 0));
+        }
+        return accounts.get(index);
+        //return accounts.get(accounts.indexOf(findByRequisite(passport, requisite)));
     }
 
     /** Method transfers from one account to another
@@ -70,13 +74,11 @@ public class BankService {
         boolean rsl = false;
         Account src = findByRequisite(srcPassport, srcRequisite); //определяем счет снятия
         Account dest = findByRequisite(destPassport, dеstRequisite); //определяем счет зачисления
-         if (src != null && dest !=  null) { //проверяем что существуют счета
-               if (src.getBalance() != 0 && src.getBalance() > amount) { //присутствие нужной суммы
-                     src.setBalance(src.getBalance() - amount); //снимаем
-                     dest.setBalance(src.getBalance() + amount); //зачисляем
-                     rsl = true;
-                 }
-        }
+         if (amount > 0 && amount <= src.getBalance() && dest != null) {
+             src.setBalance(src.getBalance() - amount); //снимаем
+             dest.setBalance(dest.getBalance() + amount); //зачисляем
+                rsl = true;
+               }
         return rsl;
     }
 
@@ -89,3 +91,5 @@ public class BankService {
             System.out.println(find.getRequisite() + " -> " + find.getBalance());
     }
 }
+
+
