@@ -11,7 +11,7 @@ public class BankService {
      * @param user - a bank client
      */
     public void addUser(User user) {
-       users.putIfAbsent(user, new ArrayList <>());  //добавляем ключ и значение, если их нет
+     this.users.putIfAbsent(user, new ArrayList <>());
     }
 
     /** Method of adding to a new account of a bank client
@@ -19,15 +19,12 @@ public class BankService {
      * @param passport - passport a bank client
      * @param account - bank account
      */
-
     public void addAccount(String passport, Account account) {
-       // this.users.get(passport).add(account);
         List<Account> accounts = this.users.get(findByPassport(passport));
-        //users.get(findByPassport(passport)); //находим клиента по паспорту
-         int index = accounts.indexOf(account);
-         if (index == -1) { //есть ли счета у клиента нет
-             accounts.add(account); //добавляем
-         }
+        int index = accounts.indexOf(account);
+        if (index == -1) { //есть ли счета у клиента нет
+        }
+        accounts.add(account); //добавляем
     }
 
     /** Method search for a bank client by passport number
@@ -36,11 +33,12 @@ public class BankService {
      * @return user
      */
     public User findByPassport(String passport) {
-        User user = new User(); //создаем обьект
-        for(User key : users.keySet()) { //проверяем всех клиентов по ключу
-           if (user.getPassport().compareTo(passport) == 0) { //
-            }
-        }
+       User user = new User();
+       for(User key : users.keySet()) {
+           if (key != null) {
+               users.get(key).equals(user.getPassport());
+           }
+       }
         return user;
     }
 
@@ -51,14 +49,13 @@ public class BankService {
      * @return received list of accounts by index
      */
     public Account findByRequisite(String passport, String requisite) {
-      List<Account> accounts = this.users.get(findByPassport(passport)); //находим пользователя
+        List <Account> accounts = this.users.get(findByPassport(passport));
         int index = accounts.indexOf(new Account(requisite, 0)); //список счетов по нему
         if (index == -1) { //есть ли счета у клиента нет
             accounts.add(new Account(requisite, 0));
         }
         return accounts.get(index);
-        //return accounts.get(accounts.indexOf(findByRequisite(passport, requisite)));
-    }
+     }
 
     /** Method transfers from one account to another
      *
@@ -69,26 +66,26 @@ public class BankService {
      * @param amount - amount of money transferred
      * @return rsl
      */
-    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport,
-                                 String dеstRequisite, double amount) {
-        boolean rsl = false;
+    public boolean transferMoney(String srcPassport, String srcRequisite,
+                                 String destPassport, String dеstRequisite, double amount) {
+        boolean rsl=false;
         Account src = findByRequisite(srcPassport, srcRequisite); //определяем счет снятия
-        Account dest = findByRequisite(destPassport, dеstRequisite); //определяем счет зачисления
-         if (amount > 0 && amount <= src.getBalance() && dest != null) {
-             src.setBalance(src.getBalance() - amount); //снимаем
-             dest.setBalance(dest.getBalance() + amount); //зачисляем
-                rsl = true;
-               }
+        Account dest = findByRequisite(destPassport, dеstRequisite); //определяем счет
+        if (amount > 0 && amount <= src.getBalance() && dest != null) { //проверяем что существуют счета
+            src.setBalance(src.getBalance() - amount);
+            dest.setBalance(dest.getBalance() + amount);
+        }
         return rsl;
     }
 
+
     public static void main(String[] args) {
-            List<Account> accounts = new ArrayList<>();
-            String requisite = "3fdsbb9";
-            accounts.add(new Account("3fdsbb9", 140));
-            int index = accounts.indexOf(new Account(requisite, -1));
-            Account find = accounts.get(index);
-            System.out.println(find.getRequisite() + " -> " + find.getBalance());
+        List<Account> accounts = new ArrayList<>();
+        String requisite = "3fdsbb9";
+        accounts.add(new Account("3fdsbb9", 140));
+        int index = accounts.indexOf(new Account(requisite, -1));
+        Account find = accounts.get(index);
+        System.out.println(find.getRequisite() + " -> " + find.getBalance());
     }
 }
 

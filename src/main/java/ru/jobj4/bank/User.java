@@ -6,9 +6,12 @@ public class User {
     private String passport;
     private String username;
 
-    public User( ) {
+    public User() {
         this.passport = passport;
         this.username = username;
+    }
+
+    public User(String passport, String username) {
     }
 
     public String getPassport() {
@@ -38,5 +41,13 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(passport);
+    }
+
+    @Override
+    public String toString( ) {
+        return "User{"+
+                "passport='"+passport+'\''+
+                ", username='"+username+'\''+
+                '}';
     }
 }

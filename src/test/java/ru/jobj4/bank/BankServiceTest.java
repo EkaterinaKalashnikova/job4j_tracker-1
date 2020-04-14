@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class BankServiceTest {
     @Test
     public void addUser() {
-        User user = new User();
+        User user = new User("3434", "Petr Arsentev");
         BankService bank = new BankService();
         bank.addUser(user);
         assertThat(bank.findByPassport("3434"), is(user));
@@ -15,7 +15,7 @@ public class BankServiceTest {
 
     @Test
     public void whenEnterInvalidPassport() {
-        User user = new User();
+        User user = new User("3434", "Petr Arsentev");
         BankService bank = new BankService();
         bank.addUser(user);
         bank.addAccount(user.getUsername(), new Account("5546", 150D));
@@ -24,7 +24,7 @@ public class BankServiceTest {
 
     @Test
     public void addAccount() {
-        User user = new User();
+        User user = new User("3434", "Petr Arsentev");
         BankService bank = new BankService();
         bank.addUser(user);
         bank.addAccount(user.getPassport(), new Account("5546", 150D));
@@ -33,7 +33,7 @@ public class BankServiceTest {
 
     @Test
     public void transferMoney() {
-        User user = new User();
+        User user = new User("3434", "Petr Arsentev");
         BankService bank = new BankService();
         bank.addUser(user);
         bank.addAccount(user.getPassport(), new Account("5546", 150D));

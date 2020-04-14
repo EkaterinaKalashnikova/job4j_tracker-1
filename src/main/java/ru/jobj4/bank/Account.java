@@ -7,8 +7,8 @@ public class Account {
     private double balance;
 
     public Account(String requisite, double balance) {
-        this.requisite = requisite;
-        this.balance = balance;
+        this.requisite=requisite;
+        this.balance=balance;
     }
 
     public String getRequisite() {
@@ -16,27 +16,35 @@ public class Account {
     }
 
     public void setRequisite(String requisite) {
-        this.requisite = requisite;
+        this.requisite=requisite;
     }
 
-    public double getBalance() {
+    public double getBalance( ) {
         return balance;
     }
 
     public void setBalance(double balance) {
-        this.balance = balance;
+        this.balance=balance;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Account account = (Account) o;
-        return Objects.equals(requisite, account.requisite);
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+        Account account=(Account) o;
+        return Objects.equals(requisite ,account.requisite);
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode( ) {
         return Objects.hash(requisite);
+    }
+
+    @Override
+    public String toString( ) {
+        return "Account{"+
+                "requisite='"+requisite+'\''+
+                ", balance="+balance+
+                '}';
     }
 }
