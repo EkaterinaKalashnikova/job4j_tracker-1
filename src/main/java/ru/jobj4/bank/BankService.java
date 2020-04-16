@@ -1,5 +1,6 @@
 package ru.jobj4.bank;
 
+import java.security.KeyStore;
 import java.util.*;
 
 public class BankService {
@@ -11,7 +12,7 @@ public class BankService {
      * @param user - a bank client
      */
     public void addUser(User user) {
-     this.users.putIfAbsent(user, new ArrayList <>());
+        this.users.putIfAbsent(user, new ArrayList <>());
     }
 
     /** Method of adding to a new account of a bank client
@@ -33,12 +34,13 @@ public class BankService {
      * @return user
      */
     public User findByPassport(String passport) {
-       User user = new User();
-       for(User key : users.keySet()) {
-           if (key != null) {
-               users.get(key).equals(user.getPassport());
-           }
-       }
+        User user = null;
+        for(User key : users.keySet()) {
+            if (key.getPassport().equals(passport)){
+                user=key;
+                break;
+            }
+        }
         return user;
     }
 
@@ -55,7 +57,7 @@ public class BankService {
             accounts.add(new Account(requisite, 0));
         }
         return accounts.get(index);
-     }
+    }
 
     /** Method transfers from one account to another
      *
@@ -80,7 +82,7 @@ public class BankService {
 
 
     public static void main(String[] args) {
-        List<Account> accounts = new ArrayList<>();
+        List <Account> accounts = new ArrayList <>();
         String requisite = "3fdsbb9";
         accounts.add(new Account("3fdsbb9", 140));
         int index = accounts.indexOf(new Account(requisite, -1));
@@ -88,5 +90,3 @@ public class BankService {
         System.out.println(find.getRequisite() + " -> " + find.getBalance());
     }
 }
-
-
