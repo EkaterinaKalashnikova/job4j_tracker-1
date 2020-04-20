@@ -21,12 +21,15 @@ public class BankService {
      * @param account - bank account
      */
     public void addAccount(String passport, Account account) {
-        List<Account> accounts = this.users.get(findByPassport(passport));
-        int index = accounts.indexOf(account);
-        if (index == -1) { //есть ли счета у клиента нет
+        List <Account> accounts = this.users.get(findByPassport(passport));
+        if (accounts != null) {
+            int index = accounts.indexOf(account);
+            if ( index == -1 ){ //есть ли счета у клиента нет
+            }
+            accounts.add(account); //добавляем
         }
-        accounts.add(account); //добавляем
     }
+
 
     /** Method search for a bank client by passport number
      *
@@ -36,9 +39,11 @@ public class BankService {
     public User findByPassport(String passport) {
         User user = null;
         for(User key : users.keySet()) {
-            if (key.getPassport().equals(passport)){
-                user=key;
-                break;
+            if (key != null) {
+                if (key.getPassport().equals(passport)) {
+                 user = key;
+                 break;
+                }
             }
         }
         return user;
@@ -51,13 +56,20 @@ public class BankService {
      * @return received list of accounts by index
      */
     public Account findByRequisite(String passport, String requisite) {
-        List <Account> accounts = this.users.get(findByPassport(passport));
-        int index = accounts.indexOf(new Account(requisite, 0)); //список счетов по нему
-        if (index == -1) { //есть ли счета у клиента нет
-            accounts.add(new Account(requisite, 0));
+        User user = findByPassport(passport);
+        if (user == null) {
+            return null;
         }
-        return accounts.get(index);
-    }
+        List <Account> accounts = users.get(findByPassport(passport));
+       // if (accounts != null) {
+            int index = accounts.indexOf(new Account(requisite ,0));
+             if (index == -1){ //есть ли счета у клиента нет
+                accounts.add(new Account(requisite ,0));
+            }
+
+            return accounts.get(index);
+        }
+
 
     /** Method transfers from one account to another
      *
