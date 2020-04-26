@@ -23,4 +23,13 @@ public class DepDeskCompTest {
         );
         assertThat(rsl, lessThan(0));
     }
+
+    @Test
+    public void whenUpDepartmentGoAfter() {
+        int rsl = new DepDeskComp().compare(
+                "K2",
+                "K2/SK1"
+        );
+        assertThat(rsl, lessThan(0));
+    }
 }
