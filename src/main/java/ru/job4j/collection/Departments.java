@@ -15,9 +15,10 @@ public class Departments {
         return comparator;
     }
 
-    public static List<String> fillGaps( List <String> deps ) {
+    public static List<String> fillGaps(List <String> deps) {
         List <String> rsl = new ArrayList<>();
         String[] dep = rsl.toArray(new String[ 0 ]);
+      //  if (  )
         HashSet <String> tmp = new HashSet<>();
         for (String value : deps) {
             String start = "";
@@ -30,6 +31,7 @@ public class Departments {
 
         return new ArrayList<>(tmp);
     }
+
 
     private static Comparator<List<String>> acsOrDescComp(int i) {
         return null;
