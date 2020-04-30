@@ -5,46 +5,31 @@ import java.util.*;
 
 public class Departments {
 
-    private final  Comparator<String> comparator;
-
-    public Departments(Comparator <String> comparator) {
-        this.comparator = comparator;
-    }
-
-    public Comparator <String> getComparator() {
-        return comparator;
-    }
-
     public static List<String> fillGaps(List <String> deps) {
-        List <String> rsl = new ArrayList<>();
-        String[] dep = rsl.toArray(new String[ 0 ]);
-      //  if (  )
-        HashSet <String> tmp = new HashSet<>();
-        for (String value : deps) {
-            String start = "";
-            for (String el : value.split("/")) {
-              if (deps.indexOf(el) < deps.size() - 1) {
-                  tmp.add(start + "/" + el);
-                   }
-                }
+        HashSet <String> tmp = new HashSet <>();
+        for(String value : deps) {
+            String start  = "";
+            //Заполнить пустующие элементы
+            for(String el : value.split("/")) {
+                start = start.isEmpty() ? el : start + "/" + el;
+                tmp.add(start);
             }
+        }
+      //  return new ArrayList <>(tmp);
 
-        return new ArrayList<>(tmp);
+        //Создать список
+     List <String> rsl = new ArrayList <>(tmp);
+        //Сортировать список
+       rsl.sort(Comparator.naturalOrder());
+       return rsl;
     }
 
-
-    private static Comparator<List<String>> acsOrDescComp(int i) {
-        return null;
+    public static void sortAsc(List <String> orgs) {
+        orgs.sort(Comparator.naturalOrder());
     }
 
-    public static void sortAsc(List <List <String>> orgs) {
-        Comparator<List<String>> comparator = acsOrDescComp(1);
-        orgs.sort(comparator);
-    }
-
-    public static void sortDesc(List <List <String>> orgs) {
-        Comparator<List<String>> comparator = acsOrDescComp(-1);
-        orgs.sort(comparator);
+    public static void sortDesc(List <String> orgs) {
+        orgs.sort(new DepDeskComp());
     }
 }
 
