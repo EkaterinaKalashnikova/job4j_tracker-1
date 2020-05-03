@@ -24,7 +24,7 @@ public class AttachmentSort {
         System.out.println(attachments);
         // Здесь создайте компаратор на основании анонимного класса.
 
-        Comparator<Attachment> comparator1 =AttachmentSort::compare;
+        Comparator<Attachment> comparator1 = AttachmentSort::compare;
         attachments.sort(comparator1);
         System.out.println(attachments);
     }
