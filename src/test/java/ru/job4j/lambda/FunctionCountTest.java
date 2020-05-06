@@ -9,7 +9,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class FunctionCountTest {
-    private FunctionCount function;
+    FunctionCount function = new FunctionCount();
 
     @Test
     public void whenLinearFunctionThenLinearResults() {
@@ -21,7 +21,7 @@ public class FunctionCountTest {
     @Test
     public void whenSquareFunctionThenSquareResults() {
         List <Double> result = function.diapason(2, 5, x -> 2 * Math.pow(x, x) + 2 * x + 2);
-        List<Double> expected = Arrays.asList(14D, 26D, 42D);
+        List<Double> expected = Arrays.asList(14D, 62D, 522D);
         assertThat(result, is(expected));
     }
 
