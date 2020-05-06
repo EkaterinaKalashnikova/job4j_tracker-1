@@ -9,7 +9,7 @@ public class FunctionCount {
         List<Double> list = new ArrayList<>();
           for(int i = start; i < end; i++) {
               list.add(func.apply((double) i));
-              }
+            }
         return list;
     }
 }
