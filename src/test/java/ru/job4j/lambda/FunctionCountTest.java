@@ -20,8 +20,8 @@ public class FunctionCountTest {
 
     @Test
     public void whenSquareFunctionThenSquareResults() {
-        List <Double> result = function.diapason(2, 5, x -> 2 * Math.pow(x, x) + 2 * x + 2);
-        List<Double> expected = Arrays.asList(14D, 62D, 522D);
+        List <Double> result = function.diapason(2, 5, x -> 2 * Math.pow(x, 2) + 2 * x + 2);
+        List<Double> expected = Arrays.asList(14D, 26D, 42D);
         assertThat(result, is(expected));
     }
 
