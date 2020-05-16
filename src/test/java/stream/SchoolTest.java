@@ -14,37 +14,35 @@ public class SchoolTest {
 
     @Before
     public void setUp() throws Exception {
-        List<Student> list = List.of(
-      new Student(25,"Ivanov"),
-      new Student(98,"Petrov"),
-      new Student(54,"Sidorov")
-        );
+        list.add(new Student(25, "Ivanov"));
+        list.add(new Student(98, "Petrov"));
+        list.add(new Student(54, "Sidorov"));
     }
 
     @Test
     public void groupOfStudents10a() {
         School school = new School();
-        List <Student> result = school.collect(list, student -> student.getScore() >= 70
-                && student.getScore() <= 100);
-        List <Student> expected = new ArrayList<Student>();
+        List <Student> result = school.collect(list, x -> x.getScore() >= 70
+                && x.getScore() <= 100);
+        List <Student> expected = List.of(new Student(98, "Petrov"));;
         assertThat(result, is(expected));
     }
 
     @Test
     public void groupOfStudents10b() {
         School school = new School();
-        List <Student> result = school.collect(list, student -> student.getScore() >= 50
-                && student.getScore() < 50);
-        List <Student> expected = new ArrayList<Student>();
+        List <Student> result = school.collect(list, x -> x.getScore() >= 50
+                && x.getScore() < 70);
+        List <Student> expected = List.of(new Student(54, "Sidorov"));
         assertThat(result, is(expected));
     }
 
     @Test
     public void groupOfStudents10c() {
         School school = new School();
-        List <Student> result = school.collect(list, student -> student.getScore() >= 0
-                && student.getScore() < 50);
-        List <Student> expected = new ArrayList<Student>();
+        List <Student> result = school.collect(list, x -> x.getScore() >= 0
+                && x.getScore() < 50);
+        List <Student> expected = List.of(new Student(25, "Ivanov"));
         assertThat(result, is(expected));
     }
 }

@@ -7,10 +7,6 @@ public class Profile {
         this.address = address;
     }
 
-    public static <Address>Profiles getAddress(Profiles profiles) {
-        return profiles;
-    }
-
     public Address getAddress( ) {
         return address;
     }

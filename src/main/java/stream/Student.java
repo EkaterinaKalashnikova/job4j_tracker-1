@@ -32,13 +32,13 @@ public class Student {
     public boolean equals( Object o ) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Student student=(Student) o;
+        Student student = (Student) o;
         return getScore() == student.getScore() &&
                 getSurname().equals(student.getSurname());
     }
 
     @Override
-    public int hashCode( ) {
+    public int hashCode() {
         return Objects.hash(getScore() ,getSurname());
     }
 }
