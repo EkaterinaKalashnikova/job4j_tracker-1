@@ -14,9 +14,11 @@ public class SchoolTest {
 
     @Before
     public void setUp() throws Exception {
-      new Student(25,"Ivanov");
-      new Student(98,"Petrov");
-      new Student(54,"Sidorov");
+        List<Student> list = List.of(
+      new Student(25,"Ivanov"),
+      new Student(98,"Petrov"),
+      new Student(54,"Sidorov")
+        );
     }
 
     @Test

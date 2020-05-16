@@ -10,4 +10,8 @@ public class Profile {
     public static <Address>Profiles getAddress(Profiles profiles) {
         return profiles;
     }
+
+    public Address getAddress( ) {
+        return address;
+    }
 }
