@@ -7,14 +7,11 @@ import java.util.stream.Stream;
 
 public class Matrix {
     public static void main( String[] args ) {
-
-    }
-   Integer[][] matrixInteger = {{1, 2},{3, 4}};
-
-   Stream <Integer[][]> fromMatrixInteger = Arrays.stream(matrixInteger)
-           .flatMap(matrixInteger::stream)
-           .collect(Collectors.toList());
-
-    public Matrix() {
+        Integer[][] matrixInteger = {{ 1 ,2 } ,{ 3 ,4 }};
+        System.out.println(
+                Arrays.stream(matrixInteger)
+                     .flatMap(matrixInteger::stream)
+                     .collect(Collectors.toList())
+        );
     }
 }
