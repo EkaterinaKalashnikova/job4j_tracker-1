@@ -12,7 +12,7 @@ public class Address {
     }
 
     public Address(String city, String street, int home, int apartment) {
-        this.city = city;
+        this.city= city;
         this.street = street;
         this.home = home;
         this.apartment = apartment;
@@ -58,6 +58,6 @@ public class Address {
     @Override
     public int hashCode()
     {
-        return Objects.hash(getCity() ,getStreet() ,getHome() ,getApartment());
+        return Objects.hash(getCity(), getStreet(), getHome(), getApartment());
     }
 }
