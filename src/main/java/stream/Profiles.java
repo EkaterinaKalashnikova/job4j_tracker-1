@@ -5,19 +5,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Profiles {
-     List<Address>  collect( List<Profile> profiles) {
-         List <Address> profilesList=profiles.stream()
+     List <Profile> collect( List<Profile> profiles) {
+         List <Address> profilesList = profiles.stream()
                  .map(Profile::getAddress)
                  .collect(Collectors.toList());
+         return profiles;
+     }
 
-        System.out.println(
-                profiles.stream()
+    List <Profile> collectUnique (List<Profile> profiles) {
+        List <Address> list = profiles.stream()
                         .map(Profile::getAddress)
                         .sorted(Comparator.comparing(Address::getCity))
                         .distinct()
-                        .collect(Collectors.toList())
-        );
-        return profilesList;
+                        .collect(Collectors.toList());
+        return profiles;
      }
 }
 
