@@ -2,7 +2,7 @@ package stream;
 
 import java.util.Objects;
 
-public class Student {
+public class Student  {
     private int score;
     private String surname;
 

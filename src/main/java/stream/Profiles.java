@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Profiles {
-     List <Profile> collect( List<Profile> profiles) {
+     List <Profile> collect(List<Profile> profiles) {
          List <Address> profilesList = profiles.stream()
                  .map(Profile::getAddress)
                  .collect(Collectors.toList());
