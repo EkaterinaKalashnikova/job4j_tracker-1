@@ -12,8 +12,9 @@ public class MatrixTest {
     @Test
     public void matrix() {
         Matrix matrix = new Matrix();
-          Integer[][] actual = matrix.matrix(4);
-          List<Integer> expected = List.of(1, 2, 3, 4);
-           assertThat(actual, is(expected));
+        Integer[][] matrixInteger = {{1, 2}, {3, 4}};
+        List <Integer> actual = matrix.matrix(matrixInteger);
+        List<Integer> expected = List.of(1, 2, 3, 4);
+        assertThat(actual, is(expected));
     }
 }
