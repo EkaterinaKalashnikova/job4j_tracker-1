@@ -4,7 +4,6 @@ import ru.jobj4.bank.Account;
 import ru.jobj4.bank.User;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class BankServiceStream {
     private Map <User, List <Account>> users = new HashMap <>(); //создаем обьект
@@ -24,13 +23,14 @@ public class BankServiceStream {
      * @return
      */
     public List <Account> addAccount(String passport, Account account) {
-        Optional <Account> added = this.users.get(findByPassport(passport)).stream()
-                .filter(Objects::nonNull)
+        /**    Optional <Account> added = this.users.get(findByPassport(passport)).stream()
+             .filter(Objects::nonNull)
                 .map(Account::getRequisite)
-                //.filter(Optional::isPresent)
+                .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
-        return (List <Account>) added.orElse(account);
+    return (List <Account>) added.orElse(account);*/
+        return null;
     }
     /**  List <Account> accounts = this.users.get(findByPassport(passport));
      if (accounts != null) {
