@@ -11,7 +11,7 @@ public class School {
        List <Student> studentList = students.stream()
                .filter(predict)
                .collect(Collectors. <Student>toList());
-       return students;
+       return studentList;
    }
 
    public List <Student> students(List <Student> students) {

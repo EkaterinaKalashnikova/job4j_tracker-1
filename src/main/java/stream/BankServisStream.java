@@ -3,12 +3,11 @@ package stream;
 import ru.jobj4.bank.Account;
 import ru.jobj4.bank.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class BankServisStream {
+public class BankServiceStream {
     private Map <User, List <Account>> users = new HashMap <>(); //создаем обьект
 
     /** Method of adding a bank client to the system
@@ -21,28 +20,41 @@ public class BankServisStream {
     }
 
     /** Method of adding to a new account of a bank client
-     *
-     * @param passport - passport a bank client
+     *  @param passport - passport a bank client
      * @param account - bank account
+     * @return
      */
-    public void addAccount(String passport, Account account) {
-        List <Account> accounts = this.users.get(findByPassport(passport));
+    public List <Account> addAccount(String passport, Account account) {
+     Optional <Account> added = this.users.get(findByPassport(passport)).stream()
+               .filter(Objects::nonNull)
+               .map(Account::getRequisite)
+               .filter(Optional::isPresent)
+               .map(Optional::get)
+               .collect(Collectors.toList());
+        return (List <Account>) added.orElse(account);
+    }
+      /**  List <Account> accounts = this.users.get(findByPassport(passport));
         if (accounts != null) {
             int index = accounts.indexOf(account);
-            if ( index == -1 ){ //есть ли счета у клиента нет
+            if (index == -1){ //есть ли счета у клиента нет
             }
             accounts.add(account); //добавляем
         }
-    }
+    }*/
 
 
     /** Method search for a bank client by passport number
      *
      * @param passport - passport a bank client
      * @return user
-     */
-    public User findByPassport(String passport) {
-        User user = null;
+    */
+     public User findByPassport(String passport) {
+         Optional<User> searched = this.users.keySet().stream()
+                 .filter(user -> user.getPassport().equals(passport))
+                 .findAny();
+         return searched.orElseGet(() -> (User) users);
+     }
+       /** User user = null;
         for(User key : users.keySet()) {
             if (key != null) {
                 if (key.getPassport().equals(passport)) {
@@ -51,8 +63,8 @@ public class BankServisStream {
                 }
             }
         }
-        return user;
-    }
+          return user;*/
+
 
     /** Method search account requisite
      *
@@ -61,19 +73,23 @@ public class BankServisStream {
      * @return received list of accounts by index
      */
     public Account findByRequisite(String passport, String requisite) {
-        User user = findByPassport(passport);
+        Optional<Account> searchedRequisite = this.users.get(findByPassport(passport)).stream()
+                .filter(account -> account.getRequisite().equals(requisite))
+                .findFirst();
+                return searchedRequisite.orElse((Account) users);
+    }
+       /** User user = findByPassport(passport);
         if (user == null) {
             return null;
         }
         List <Account> accounts = users.get(findByPassport(passport));
-        // if (accounts != null) {
         int index = accounts.indexOf(new Account(requisite ,0));
         if (index == -1){ //есть ли счета у клиента нет
             accounts.add(new Account(requisite ,0));
         }
 
         return accounts.get(index);
-    }
+    }*/
 
 
     /** Method transfers from one account to another
@@ -87,7 +103,7 @@ public class BankServisStream {
      */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String dеstRequisite, double amount) {
-        boolean rsl=false;
+        boolean rsl = false;
         Account src = findByRequisite(srcPassport, srcRequisite); //определяем счет снятия
         Account dest = findByRequisite(destPassport, dеstRequisite); //определяем счет
         if (amount > 0 && amount <= src.getBalance() && dest != null) { //проверяем что существуют счета

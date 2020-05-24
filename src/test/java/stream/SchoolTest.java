@@ -24,7 +24,7 @@ public class SchoolTest {
         School school = new School();
         List <Student> result = school.collect(list, x -> x.getScore() >= 70
                 && x.getScore() <= 100);
-        List <Student> expected = List.of(new Student(98, "Petrov"));;
+        List <Student> expected = List.of(new Student(98, "Petrov"));
         assertThat(result, is(expected));
     }
 
