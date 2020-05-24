@@ -5,7 +5,6 @@ import ru.jobj4.bank.User;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BankServiceStream {
     private Map <User, List <Account>> users = new HashMap <>(); //создаем обьект
@@ -25,45 +24,45 @@ public class BankServiceStream {
      * @return
      */
     public List <Account> addAccount(String passport, Account account) {
-     Optional <Account> added = this.users.get(findByPassport(passport)).stream()
-               .filter(Objects::nonNull)
-               .map(Account::getRequisite)
-               .filter(Optional::isPresent)
-               .map(Optional::get)
-               .collect(Collectors.toList());
+        Optional <Account> added = this.users.get(findByPassport(passport)).stream()
+                .filter(Objects::nonNull)
+                .map(Account::getRequisite)
+                //.filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
         return (List <Account>) added.orElse(account);
     }
-      /**  List <Account> accounts = this.users.get(findByPassport(passport));
-        if (accounts != null) {
-            int index = accounts.indexOf(account);
-            if (index == -1){ //есть ли счета у клиента нет
-            }
-            accounts.add(account); //добавляем
-        }
-    }*/
+    /**  List <Account> accounts = this.users.get(findByPassport(passport));
+     if (accounts != null) {
+     int index = accounts.indexOf(account);
+     if (index == -1){ //есть ли счета у клиента нет
+     }
+     accounts.add(account); //добавляем
+     }
+     }*/
 
 
     /** Method search for a bank client by passport number
      *
      * @param passport - passport a bank client
      * @return user
-    */
-     public User findByPassport(String passport) {
-         Optional<User> searched = this.users.keySet().stream()
-                 .filter(user -> user.getPassport().equals(passport))
-                 .findAny();
-         return searched.orElseGet(() -> (User) users);
+     */
+    public User findByPassport(String passport) {
+        Optional<User> searched = this.users.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findAny();
+        return searched.orElseGet(() -> (User) users);
+    }
+    /** User user = null;
+     for(User key : users.keySet()) {
+     if (key != null) {
+     if (key.getPassport().equals(passport)) {
+     user = key;
+     break;
      }
-       /** User user = null;
-        for(User key : users.keySet()) {
-            if (key != null) {
-                if (key.getPassport().equals(passport)) {
-                    user = key;
-                    break;
-                }
-            }
-        }
-          return user;*/
+     }
+     }
+     return user;*/
 
 
     /** Method search account requisite
@@ -76,20 +75,20 @@ public class BankServiceStream {
         Optional<Account> searchedRequisite = this.users.get(findByPassport(passport)).stream()
                 .filter(account -> account.getRequisite().equals(requisite))
                 .findFirst();
-                return searchedRequisite.orElse((Account) users);
+        return searchedRequisite.orElse((Account) users);
     }
-       /** User user = findByPassport(passport);
-        if (user == null) {
-            return null;
-        }
-        List <Account> accounts = users.get(findByPassport(passport));
-        int index = accounts.indexOf(new Account(requisite ,0));
-        if (index == -1){ //есть ли счета у клиента нет
-            accounts.add(new Account(requisite ,0));
-        }
+    /** User user = findByPassport(passport);
+     if (user == null) {
+     return null;
+     }
+     List <Account> accounts = users.get(findByPassport(passport));
+     int index = accounts.indexOf(new Account(requisite ,0));
+     if (index == -1){ //есть ли счета у клиента нет
+     accounts.add(new Account(requisite ,0));
+     }
 
-        return accounts.get(index);
-    }*/
+     return accounts.get(index);
+     }*/
 
 
     /** Method transfers from one account to another
@@ -123,3 +122,5 @@ public class BankServiceStream {
         System.out.println(find.getRequisite() + " -> " + find.getBalance());
     }
 }
+
+
