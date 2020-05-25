@@ -105,10 +105,10 @@ public class BankServiceStream {
         boolean rsl = false;
         Account src = findByRequisite(srcPassport, srcRequisite); //определяем счет снятия
         Account dest = findByRequisite(destPassport, dеstRequisite); //определяем счет
-        if (amount > 0 && amount <= src.getBalance() && dest != null) { //проверяем что существуют счета
+      /**  if (amount > 0 && amount <= src.getBalance() && dest != null) { //проверяем что существуют счета
             src.setBalance(src.getBalance() - amount);
             dest.setBalance(dest.getBalance() + amount);
-        }
+        }*/
         return rsl;
     }
 
