@@ -10,7 +10,7 @@ public abstract class Students implements Comparable<Student> {
     List<Student> levelOf(List <Student> students, int bound) {
         return students.stream()
                 .flatMap(Stream::ofNullable)
-                .sorted(Comparator.comparing(Student::getSurname))
+                .sorted(Comparator.comparing(Student::getScore))
                 .takeWhile(v -> v.getScore() > bound)
                 .collect(Collectors.toList());
     }
