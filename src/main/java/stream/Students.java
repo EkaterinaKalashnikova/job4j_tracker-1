@@ -11,7 +11,7 @@ public abstract class Students implements Comparable<Student> {
         return students.stream()
                 .flatMap(Stream::ofNullable)
                 .sorted(Comparator.comparing(Student::getSurname))
-                .takeWhile(v -> v.getScore() < bound)
+                .takeWhile(v -> v.getScore() > bound)
                 .collect(Collectors.toList());
     }
 }
