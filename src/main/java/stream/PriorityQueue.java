@@ -13,9 +13,9 @@ public class PriorityQueue {
      * @param task задача
      */
     public void put(Task task) {
-        int index = 0;
+        var index = 0;
         if (!tasks.isEmpty()) {//если коллекция существут, то
-            for (Task element : tasks) {//перебираем элементы в списке
+            for (var element : tasks) {//перебираем элементы в списке
                 if(element.getPriority() <= task.getPriority()){
                     //if(element.getPriority() <= tasks.get(index).getPriority()){
                     //сравниваем данные списка с приоритетными по всему списку
