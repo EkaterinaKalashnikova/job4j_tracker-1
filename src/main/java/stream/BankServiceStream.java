@@ -26,8 +26,8 @@ public class BankServiceStream {
         if (accounts != null) {
             int index = accounts.indexOf(account);
             if ( index == -1 ){ //есть ли счета у клиента нет
+                accounts.add(account); //добавляем
             }
-            accounts.add(account); //добавляем
         }
     }
 
@@ -37,10 +37,10 @@ public class BankServiceStream {
      * @return user
      */
     public User findByPassport(String passport) {
-        Optional<User> searched = this.users.keySet().stream()
+        return this.users.keySet().stream()
                 .filter(user -> user.getPassport().equals(passport))
-                .findAny();
-        return searched.orElseGet(() -> (User) users);
+                .findFirst()
+                .orElse(null);
     }
 
     /** Method search account requisite
@@ -50,10 +50,10 @@ public class BankServiceStream {
      * @return received list of accounts by index
      */
     public Account findByRequisite(String passport, String requisite) {
-        Optional<Account> searchedRequisite = this.users.get(findByPassport(passport)).stream()
+        return this.users.get(findByPassport(passport)).stream()
                 .filter(account -> account.getRequisite().equals(requisite))
-                .findFirst();
-        return searchedRequisite.orElse((Account) users);
+                .findFirst()
+                .orElse(null);
     }
 
     /** Method transfers from one account to another
@@ -70,10 +70,12 @@ public class BankServiceStream {
         boolean rsl = false;
         Account src = findByRequisite(srcPassport, srcRequisite); //определяем счет снятия
         Account dest = findByRequisite(destPassport, dеstRequisite); //определяем счет
-       if (amount > 0 && amount <= src.getBalance() && dest != null) { //проверяем что существуют счета
-            src.setBalance(src.getBalance() - amount);
-            dest.setBalance(dest.getBalance() + amount);
-        }
+         if (src != null && dest != null) {
+             if (amount > 0 && amount <= src.getBalance()){ //проверяем что существуют счета
+                 src.setBalance(src.getBalance()-amount);
+                 dest.setBalance(dest.getBalance()+amount);
+             }
+         }
         return rsl;
     }
 
