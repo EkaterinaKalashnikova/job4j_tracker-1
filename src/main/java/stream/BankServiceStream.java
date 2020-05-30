@@ -25,7 +25,7 @@ public class BankServiceStream {
         List <Account> accounts = this.users.get(findByPassport(passport));
         if (accounts != null) {
             int index = accounts.indexOf(account);
-            if ( index == -1 ){ //есть ли счета у клиента нет
+            if (index == -1){ //есть ли счета у клиента нет
                 accounts.add(account); //добавляем
             }
         }
