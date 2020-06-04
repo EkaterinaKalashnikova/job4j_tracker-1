@@ -17,12 +17,12 @@ public class FI {
             }
         };
         Arrays.sort(atts, comparator);
-        System.out.println(atts);
+        System.out.println(Arrays.toString(atts));
 
         Comparator<String> cmpText = String::compareTo;
         System.out.println(cmpText);
 
-        Comparator<String> cmpDescSize = (left, right) -> left.length()- right.length();
+        Comparator<String> cmpDescSize =Comparator.comparingInt(String::length);
         System.out.println(cmpDescSize);
     }
 }
