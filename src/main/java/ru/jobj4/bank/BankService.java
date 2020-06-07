@@ -1,7 +1,9 @@
 package ru.jobj4.bank;
 
-import java.security.KeyStore;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BankService {
     private Map<User, List<Account>> users = new HashMap<>(); //создаем обьект
@@ -24,9 +26,9 @@ public class BankService {
         List <Account> accounts = this.users.get(findByPassport(passport));
         if (accounts != null) {
             int index = accounts.indexOf(account);
-            if ( index == -1 ){ //есть ли счета у клиента нет
+            if (index == -1){ //есть ли счета у клиента нет
+             accounts.add(account); //добавляем
             }
-            accounts.add(account); //добавляем
         }
     }
 
@@ -66,7 +68,6 @@ public class BankService {
              if (index == -1){ //есть ли счета у клиента нет
                 accounts.add(new Account(requisite ,0));
             }
-
             return accounts.get(index);
         }
 
