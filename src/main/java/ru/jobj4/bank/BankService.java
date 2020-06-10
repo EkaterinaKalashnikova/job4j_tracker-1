@@ -61,14 +61,14 @@ public class BankService {
         if (user == null) {
             return null;
         }
-        List <Account> accounts = users.get(findByPassport(passport));
-       // if (accounts != null) {
-            int index = accounts.indexOf(new Account(requisite ,0));
-             if (index == -1){ //есть ли счета у клиента нет
-                accounts.add(new Account(requisite ,0));
-            }
-            return accounts.get(index);
+        Account result = null;
+        List <Account> accounts = users.get(user);
+        int index = accounts.indexOf(new Account(requisite, 0));
+        if (index != -1) {
+            result = accounts.get(index);
         }
+        return result;
+    }
 
 
     /** Method transfers from one account to another
