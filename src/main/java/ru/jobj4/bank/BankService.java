@@ -23,18 +23,14 @@ public class BankService {
      * @param account - bank account
      */
     public void addAccount(String passport, Account account) {
-        List <Account> accounts = this.users.get(findByPassport(passport));
-        User user = findByPassport(passport);
-        if (user != null) {
-            if (accounts != null) {
-                int index=accounts.indexOf(account);
-                if (index == -1) { //есть ли счета у клиента нет
-                    accounts.add(account); //добавляем
-                }
+        User user=findByPassport(passport);
+        if ( user != null ){
+            List <Account> accounts=this.users.get(user);
+            if (!accounts.contains(account)){//есть ли счета у клиента нет
+                accounts.add(account); //добавляем
             }
         }
     }
-
 
     /** Method search for a bank client by passport number
      *
