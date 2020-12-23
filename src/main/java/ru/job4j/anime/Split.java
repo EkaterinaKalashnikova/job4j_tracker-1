@@ -9,9 +9,9 @@ public class Split {
         int count = 1, index = 0, row = 0;
         boolean flag = false;
         for(int i = 0; i < str.length; i ++) {
-            if (str[i] == c) { //проверяем, что следующий не пробел
+            if (str[i] == c) {
                 continue;
-            } else if (str[i + 1] != c) {
+            } else if (str[i + 1] != c) { //проверяем, что следующий не пробел
                count++;
             } else {
                 result[row++] = new char[count];
@@ -34,7 +34,6 @@ public class Split {
                    flag = true;
                    break;
                }
-
             }
             if ( flag ) {
                break;
