@@ -9,7 +9,7 @@ public class Cryptography {
         if (s.isEmpty()) {
             System.out.print("empty");
             return "empty";
-        } else if (s.indexOf(s,0) > 4) {
+        } else if (s.indexOf(s) > 4) {
             return s;
         }
         return sb.toString();
