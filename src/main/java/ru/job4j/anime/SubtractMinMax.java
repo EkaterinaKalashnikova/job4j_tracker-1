@@ -9,10 +9,10 @@ public class SubtractMinMax {
         //for(int i = 0; i < ints.length-1; i++) {
            // j = 1;
             while(j < ints.length) {
-                if (min < ints[ j ] && ints[j] > max) {
+                if (min < ints[ j ] && ints[ j ] > max) {
                     max = ints[ j ];
                 }
-                else if (ints[ j ] < min && ints[j] < min) {
+                else if (ints[ j ] < min && ints[ j ] < max) {
                     min = ints[ j ];
                 }
                 j++;

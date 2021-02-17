@@ -62,4 +62,74 @@ public class PushTheNumbersTest {
         };
         assertThat(array, is(expected));
     }
+
+    @Test
+    public void testWithArrayInCoroner() {
+        int [][] array = {
+                {29, 29, 48, 92},
+                {90, 58, 7, 57},
+                {87, 36, 21, 19},
+                {93, 55, 60, 89}
+        };
+        PushTheNumbers.push(array, 0, 0);
+        int[][] expected = {
+                {0, 29, 29, 48},
+                {29, 58, 7, 57},
+                {90, 36, 21, 19},
+                {87, 55, 60, 89}
+        };
+        assertThat(array, is(expected));
+    }
+    @Test
+    public void testWithArrayInRightUp() {
+        int [][] array = {
+                {29, 29, 48, 92},
+                {90, 58, 7, 57},
+                {87, 36, 21, 19},
+                {93, 55, 60, 89}
+        };
+        PushTheNumbers.push(array, 0, 3);
+        int[][] expected = {
+                {29, 48, 92, 0},
+                {90, 58, 7, 92},
+                {87, 36, 21, 57},
+                {93, 55, 60, 19 }
+        };
+        assertThat(array, is(expected));
+    }
+    @Test
+    public void testWithArrayInLeftDown() {
+        int [][] array = {
+                {29, 29, 48, 92},
+                {90, 58, 7, 57},
+                {87, 36, 21, 19},
+                {93, 55, 60, 89}
+        };
+        PushTheNumbers.push(array, 3, 0);
+        int[][] expected = {
+                {90, 29, 48, 92},
+                {87, 58, 7, 57},
+                {93, 36, 21, 19},
+                {0, 93, 55, 60 }
+        };
+        assertThat(array, is(expected));
+    }
+    @Test
+    public void testWithArrayInRightDown() {
+        int [][] array = {
+                {29, 29, 48, 92},
+                {90, 58, 7, 57},
+                {87, 36, 21, 19},
+                {93, 55, 60, 89}
+        };
+        PushTheNumbers.push(array, 3 , 3);
+        int[][] expected = {
+                {29, 29, 48, 57},
+                {90, 58, 7, 19},
+                {87, 36, 21, 89},
+                {55, 60, 89, 0 }
+        };
+        assertThat(array, is(expected));
+    }
+
 }
