@@ -9,6 +9,6 @@ public class AddIndexElemrnt {
         if (list.size () < check.size ()) {
             list.add(index ,str);
         }
-        return list.contains(str) ? false : true;
+        return !list.contains (str);
     }
 }

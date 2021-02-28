@@ -5,9 +5,7 @@ public class Divider {
         boolean flag = false;
 
         for(int i = 0; i < ints.length; i ++) {
-            if (num % ints[i] == 0) {
-                flag = true;
-            } else flag = false;
+            flag =num % ints[ i ] == 0;
         }
         return flag;
     }

@@ -1,11 +1,18 @@
 package ru.job4j.set;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class UniqueName {
-    public static int collectUniqueName( List <User> users) {
-        return -1;
+    public static int collectUniqueName(List <User> users) {
+        Set<User> set = new HashSet<>();
+        for(int i = 0; i < users.size(); i ++) {
+            set.add(users.get(i));
+
+        }
+        return set.size();
     }
 
     public static class User {

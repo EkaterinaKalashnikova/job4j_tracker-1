@@ -17,9 +17,6 @@ public class ExampleRook {
        return true;
    }
     // else if (l.trim().length() == 0 && r.trim().length() == 0) {
-      else if(l.trim() == "" && r.trim() == "") {
-         return true;
-      }
-        return false;
+      else return l.trim () == "" && r.trim () == "";
     }
 }

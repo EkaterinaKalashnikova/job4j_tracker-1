@@ -10,7 +10,7 @@ public class School {
    public List<Student> collect(List<Student> students, Predicate<Student> predict) {
        List <Student> studentList = students.stream()
                .filter(predict)
-               .collect(Collectors. <Student>toList());
+               .collect(Collectors.toList());
        return studentList;
    }
 
